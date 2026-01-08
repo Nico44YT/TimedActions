@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nico.timed_actions.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "v1.blockentity.BlockEntityInjectMixin",
+    "v1.blockentity.WrappedBlockEntityTickInvokerMixin",
+    "v1.blockentity.client.BlockEntityRenderDispatcherMixin",
+    "v1.entity.EntityInjectMixin",
+    "v1.entity.LivingEntityMixin"
+  ],
+  "client": [
+    "v1.entity.client.EntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

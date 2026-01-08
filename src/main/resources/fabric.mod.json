@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "timed_actions",
+  "version": "${version}",
+  "name": "TimedActions",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/timed_actions/icon.png",
+  "environment": "*",
+  "accessWidener": "timed_actions.accesswidener",
+  "entrypoints": {
+    "client": [
+      "nico.timed_actions.internal.client.TimedActionsClient"
+    ],
+    "main": [
+      "nico.timed_actions.internal.TimedActions"
+    ]
+  },
+  "mixins": [
+    "timed_actions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/class_1297": [
+        "nico/timed_actions/api/v1/TimedActionHolder"
+      ],
+      "net/minecraft/class_2586": [
+        "nico/timed_actions/api/v1/TimedActionHolder"
+      ]
+    }
+  }
+}

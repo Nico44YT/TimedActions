@@ -1,0 +1,5 @@
+accessWidener v2 named
+
+accessible class net/minecraft/world/chunk/WorldChunk$WrappedBlockEntityTickInvoker
+accessible class net/minecraft/world/chunk/WorldChunk$DirectBlockEntityTickInvoker
+accessible field net/minecraft/world/chunk/WorldChunk$DirectBlockEntityTickInvoker blockEntity Lnet/minecraft/block/entity/BlockEntity;
