@@ -1,6 +1,5 @@
 package nico.timed_actions.internal.v1.networking;
 
-import nazario.liby.api.nbt.LibyNbtCompound;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,6 +10,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import nico.liby.api.nbt.LibyNbtCompound;
 import nico.timed_actions.api.v1.TimedActionHolder;
 
 public record SyncActionS2C(NbtCompound animationData,

@@ -1,8 +1,8 @@
 package nico.timed_actions.api.v1.registry;
 
-import nazario.liby.api.util.LibyIdentifier;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
+import nico.liby.api.util.LibyIdentifier;
 import nico.timed_actions.api.v1.EntityTimedAction;
 import nico.timed_actions.api.v1.TimedAction;
 import nico.timed_actions.api.v1.TimedActionHolder;

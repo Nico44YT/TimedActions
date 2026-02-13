@@ -1,11 +1,11 @@
 package nico.timed_actions.internal;
 
-import nazario.liby.api.util.LibyIdentifier;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import nico.liby.api.util.LibyIdentifier;
 import nico.timed_actions.internal.command.MainCommand;
 import nico.timed_actions.internal.test.TestBlockEntityAction;
 import nico.timed_actions.internal.test.TestEntityAction;

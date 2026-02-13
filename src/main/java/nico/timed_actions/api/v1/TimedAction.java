@@ -1,16 +1,16 @@
 package nico.timed_actions.api.v1;
 
-import nazario.liby.api.nbt.LibyNbtCompound;
-import nazario.liby.api.nbt.NbtStorable;
-import nazario.liby.api.util.LibyIdentifier;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import nico.liby.api.nbt.LibyNbtCompound;
+import nico.liby.api.util.LibyIdentifier;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public abstract class TimedAction<T extends TimedActionHolder> implements NbtStorable {
+public abstract class TimedAction<T extends TimedActionHolder> {
     protected Identifier actionIdentifier;
     protected Predicate<T> predicate;
 
@@ -160,8 +160,16 @@ public abstract class TimedAction<T extends TimedActionHolder> implements NbtSto
         return MAX_DURATION - this.ticksLeft;
     }
 
-    public <U extends TimedActionHolder> boolean matches(TimedAction<U> otherAnimation) {
+    public boolean matches(TimedAction<T> otherAnimation) {
         return this.getActionIdentifier().equals(otherAnimation.getActionIdentifier());
+    }
+
+    public void ifMatches(TimedAction<T> otherAnimation, Consumer<TimedAction<T>> actionConsumer) {
+        if(this.getActionIdentifier().equals(otherAnimation.getActionIdentifier())) actionConsumer.accept(this);
+    }
+
+    public void ifIdEquals(Identifier identifier, Consumer<TimedAction<T>> actionConsumer) {
+        if(this.getActionIdentifier().equals(identifier)) actionConsumer.accept(this);
     }
 
     @ApiStatus.Internal

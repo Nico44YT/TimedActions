@@ -1,9 +1,9 @@
 package nico.timed_actions.mixin.v1.entity;
 
-import nazario.liby.api.nbt.LibyNbtCompound;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
+import nico.liby.api.nbt.LibyNbtCompound;
 import nico.timed_actions.api.v1.EntityTimedAction;
 import nico.timed_actions.api.v1.TimedAction;
 import nico.timed_actions.api.v1.TimedActionHolder;

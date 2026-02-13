@@ -1,9 +1,9 @@
 package nico.timed_actions.internal.v1;
 
-import nazario.liby.api.util.LibyIdentifier;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
+import nico.liby.api.util.LibyIdentifier;
 import nico.timed_actions.api.v1.BlockEntityTimedAction;
 import nico.timed_actions.api.v1.EntityTimedAction;
 import nico.timed_actions.api.v1.TimedAction;
