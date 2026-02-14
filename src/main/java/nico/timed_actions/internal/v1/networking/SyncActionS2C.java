@@ -10,7 +10,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import nico.liby.api.nbt.LibyNbtCompound;
+import nico.kittylib.api.nbt.KittyLibNbtCompound;
 import nico.timed_actions.api.v1.TimedActionHolder;
 
 public record SyncActionS2C(NbtCompound animationData,
@@ -24,8 +24,8 @@ public record SyncActionS2C(NbtCompound animationData,
     }
 
     public static SyncActionS2C create(TimedActionHolder holder) {
-        LibyNbtCompound animationData = new LibyNbtCompound();
-        LibyNbtCompound animatableResolver = new LibyNbtCompound();
+        KittyLibNbtCompound animationData = new KittyLibNbtCompound();
+        KittyLibNbtCompound animatableResolver = new KittyLibNbtCompound();
 
         holder.getTimedAction().get().writeNbt(animationData);
 
@@ -56,20 +56,20 @@ public record SyncActionS2C(NbtCompound animationData,
     }
 
     public static TimedActionHolder getHolder(World world, NbtCompound animatableResolver) {
-        LibyNbtCompound libyNbt = new LibyNbtCompound(animatableResolver);
+        KittyLibNbtCompound kittylibNbt = new KittyLibNbtCompound(animatableResolver);
 
-        TimedActionHolder.AnimatableType type = libyNbt.getEnum("type", TimedActionHolder.AnimatableType.class);
+        TimedActionHolder.AnimatableType type = kittylibNbt.getEnum("type", TimedActionHolder.AnimatableType.class);
 
         return switch (type) {
             case ENTITY -> {
-                int entityId = libyNbt.getInt("entity_id");
+                int entityId = kittylibNbt.getInt("entity_id");
 
                 yield world.getEntityById(entityId);
             }
             case BLOCK_ENTITY -> {
-                BlockPos blockPos = libyNbt.getBlockPos("block_pos");
-                String worldKey = libyNbt.getString("world");
-                String blockEntityType = libyNbt.getString("block_entity_type");
+                BlockPos blockPos = kittylibNbt.getBlockPos("block_pos");
+                String worldKey = kittylibNbt.getString("world");
+                String blockEntityType = kittylibNbt.getString("block_entity_type");
 
                 if (world.getRegistryKey().toString().equals(worldKey)) {
                     BlockEntity blockEntity = world.getBlockEntity(blockPos);

@@ -3,7 +3,7 @@ package nico.timed_actions.mixin.v1.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import nico.liby.api.nbt.LibyNbtCompound;
+import nico.kittylib.api.nbt.KittyLibNbtCompound;
 import nico.timed_actions.api.v1.*;
 import nico.timed_actions.internal.v1.InternalTimedActionRegistry;
 import nico.timed_actions.internal.v1.networking.SyncActionS2C;
@@ -100,7 +100,7 @@ public abstract class EntityInjectMixin implements TimedActionHolder {
     @Inject(method = "writeNbt", at = @At("TAIL"))
     public void timedActions$writeNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
         if(this.playingAction != null) {
-            LibyNbtCompound nbtCompound = new LibyNbtCompound();
+            KittyLibNbtCompound nbtCompound = new KittyLibNbtCompound();
             this.playingAction.writeNbt(nbtCompound);
             nbt.put("timed_action", nbtCompound);
         }
@@ -110,7 +110,7 @@ public abstract class EntityInjectMixin implements TimedActionHolder {
     public void timedActions$readNbt(NbtCompound nbt, CallbackInfo ci) {
         if(nbt.contains("timed_action")) {
             Entity entity = (Entity)(Object)this;
-            LibyNbtCompound nbtCompound = new LibyNbtCompound(nbt.getCompound("timed_action"));
+            KittyLibNbtCompound nbtCompound = new KittyLibNbtCompound(nbt.getCompound("timed_action"));
 
             Identifier identifier = nbtCompound.getIdentifier("identifier");
 

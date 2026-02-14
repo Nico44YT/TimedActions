@@ -3,7 +3,7 @@ package nico.timed_actions.internal.v1;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import nico.liby.api.util.LibyIdentifier;
+import nico.kittylib.api.util.KittyLibIdentifier;
 import nico.timed_actions.api.v1.BlockEntityTimedAction;
 import nico.timed_actions.api.v1.EntityTimedAction;
 import nico.timed_actions.api.v1.TimedAction;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class InternalTimedActionRegistry {
     static Map<Identifier, TimedActionEntry<? extends TimedAction<? extends TimedActionHolder>, ? extends TimedActionHolder>> timedActionEntries = new ConcurrentHashMap<>();
 
-    public static <T extends EntityTimedAction<U>, U extends Entity> Identifier registerEntityAction(LibyIdentifier identifier, EntityTimedAction.EntityFactory<T, U> factory, Predicate<U> predicate) {
+    public static <T extends EntityTimedAction<U>, U extends Entity> Identifier registerEntityAction(KittyLibIdentifier identifier, EntityTimedAction.EntityFactory<T, U> factory, Predicate<U> predicate) {
         if (timedActionEntries.containsKey(identifier)) {
             throw new RuntimeException(String.format("[TimedActions] Action with id %s is already registered, if you want to overwrite an action use .setAction", identifier));
         }
@@ -27,7 +27,7 @@ public class InternalTimedActionRegistry {
         return identifier;
     }
 
-    public static <T extends BlockEntityTimedAction<U>, U extends BlockEntity> Identifier registerBlockEntityAction(LibyIdentifier identifier, BlockEntityTimedAction.BlockEntityFactory<T, U> factory, Predicate<U> predicate) {
+    public static <T extends BlockEntityTimedAction<U>, U extends BlockEntity> Identifier registerBlockEntityAction(KittyLibIdentifier identifier, BlockEntityTimedAction.BlockEntityFactory<T, U> factory, Predicate<U> predicate) {
         if (timedActionEntries.containsKey(identifier)) {
             throw new RuntimeException(String.format("[TimedActions] Action with id %s is already registered, if you want to overwrite an action use .setAction", identifier));
         }
@@ -35,7 +35,7 @@ public class InternalTimedActionRegistry {
         return identifier;
     }
 
-    public static <T extends TimedAction<U>, U extends TimedActionHolder> Identifier registerAction(LibyIdentifier identifier, TimedAction.Factory<T, U> factory, Predicate<U> predicate) {
+    public static <T extends TimedAction<U>, U extends TimedActionHolder> Identifier registerAction(KittyLibIdentifier identifier, TimedAction.Factory<T, U> factory, Predicate<U> predicate) {
         if (timedActionEntries.containsKey(identifier)) {
             throw new RuntimeException(String.format("[TimedActions] Action with id %s is already registered, if you want to overwrite an action use .setAction", identifier));
         }
@@ -43,7 +43,7 @@ public class InternalTimedActionRegistry {
         return identifier;
     }
 
-    public static <T extends TimedAction<U>, U extends TimedActionHolder> Identifier setAction(LibyIdentifier identifier, TimedAction.Factory<T, U> factory, Predicate<U> predicate) {
+    public static <T extends TimedAction<U>, U extends TimedActionHolder> Identifier setAction(KittyLibIdentifier identifier, TimedAction.Factory<T, U> factory, Predicate<U> predicate) {
         timedActionEntries.put(identifier, new TimedActionEntry<>(factory, predicate));
 
         return identifier;
@@ -54,7 +54,7 @@ public class InternalTimedActionRegistry {
         TimedActionEntry<T, U> entry = (TimedActionEntry<T, U>) timedActionEntries.get(identifier);
         if (entry == null) return null;
 
-        T animation = entry.factory().apply(new LibyIdentifier(identifier), entry.predicate());
+        T animation = entry.factory().apply(new KittyLibIdentifier(identifier), entry.predicate());
         if (animation.checkPredicate(holder)) {
             return animation;
         }
@@ -70,7 +70,7 @@ public class InternalTimedActionRegistry {
     }
 
     public static <T extends TimedAction<U>, U extends TimedActionHolder> Optional<Supplier<T>> getActionSupplier(Identifier identifier) {
-        return Optional.of((Supplier<T>) timedActionEntries.getOrDefault(identifier, null).supplier(new LibyIdentifier(identifier)));
+        return Optional.of((Supplier<T>) timedActionEntries.getOrDefault(identifier, null).supplier(new KittyLibIdentifier(identifier)));
     }
 
     public static Map<Identifier, TimedActionEntry<?, ?>> getAllFromNamespace(String namespace) {

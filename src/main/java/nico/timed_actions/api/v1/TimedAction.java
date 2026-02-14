@@ -3,8 +3,8 @@ package nico.timed_actions.api.v1;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import nico.liby.api.nbt.LibyNbtCompound;
-import nico.liby.api.util.LibyIdentifier;
+import nico.kittylib.api.nbt.KittyLibNbtCompound;
+import nico.kittylib.api.util.KittyLibIdentifier;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.function.Consumer;
@@ -110,13 +110,13 @@ public abstract class TimedAction<T extends TimedActionHolder> {
 
     @ApiStatus.Internal
     public void readNbt(NbtCompound tag) {
-        LibyNbtCompound libyNbtCompound = new LibyNbtCompound(tag);
-        readNbt(libyNbtCompound);
-        tag.copyFrom(libyNbtCompound);
+        KittyLibNbtCompound kittylibNbtCompound = new KittyLibNbtCompound(tag);
+        readNbt(kittylibNbtCompound);
+        tag.copyFrom(kittylibNbtCompound);
     }
 
-    private void readNbt(LibyNbtCompound tag) {
-        this.actionIdentifier = new LibyIdentifier(tag.getIdentifier("identifier"));
+    private void readNbt(KittyLibNbtCompound tag) {
+        this.actionIdentifier = new KittyLibIdentifier(tag.getIdentifier("identifier"));
         this.ticksLeft = tag.getLong("ticks_left");
         this.playState = tag.getEnum("play_state", TimedActionPlayState.class);
 
@@ -125,17 +125,17 @@ public abstract class TimedAction<T extends TimedActionHolder> {
 
     @ApiStatus.Internal
     public void writeNbt(NbtCompound tag) {
-        LibyNbtCompound libyNbtCompound = new LibyNbtCompound(tag);
-        writeNbt(libyNbtCompound);
-        tag.copyFrom(libyNbtCompound);
+        KittyLibNbtCompound kittylibNbtCompound = new KittyLibNbtCompound(tag);
+        writeNbt(kittylibNbtCompound);
+        tag.copyFrom(kittylibNbtCompound);
     }
 
-    private void writeNbt(LibyNbtCompound tag) {
+    private void writeNbt(KittyLibNbtCompound tag) {
         tag.putIdentifier("identifier", this.actionIdentifier);
         tag.putLong("ticks_left", this.ticksLeft);
         tag.putEnum("play_state", this.playState);
 
-        LibyNbtCompound customData = new LibyNbtCompound();
+        KittyLibNbtCompound customData = new KittyLibNbtCompound();
         this.writeCustomData(customData);
         tag.put("custom_data", customData);
     }

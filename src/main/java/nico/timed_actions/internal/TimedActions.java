@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import nico.liby.api.util.LibyIdentifier;
+import nico.kittylib.api.util.KittyLibIdentifier;
 import nico.timed_actions.internal.command.MainCommand;
 import nico.timed_actions.internal.test.TestBlockEntityAction;
 import nico.timed_actions.internal.test.TestEntityAction;
@@ -18,8 +18,8 @@ public class TimedActions implements ModInitializer {
         CommandRegistrationCallback.EVENT.register(MainCommand::new);
 
         if(FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            InternalTimedActionRegistry.registerEntityAction(LibyIdentifier.of("timed_actions", "entity/test"), TestEntityAction::new, holder -> holder instanceof PlayerEntity);
-            InternalTimedActionRegistry.registerBlockEntityAction(LibyIdentifier.of("timed_actions", "blockentity/test"), TestBlockEntityAction::new, holder -> holder instanceof BlockEntity);
+            InternalTimedActionRegistry.registerEntityAction(KittyLibIdentifier.of("timed_actions", "entity/test"), TestEntityAction::new, holder -> holder instanceof PlayerEntity);
+            InternalTimedActionRegistry.registerBlockEntityAction(KittyLibIdentifier.of("timed_actions", "blockentity/test"), TestBlockEntityAction::new, holder -> holder instanceof BlockEntity);
         }
     }
 }

@@ -2,7 +2,7 @@ package nico.timed_actions.api.v1.registry;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import nico.liby.api.util.LibyIdentifier;
+import nico.kittylib.api.util.KittyLibIdentifier;
 import nico.timed_actions.api.v1.EntityTimedAction;
 import nico.timed_actions.api.v1.TimedAction;
 import nico.timed_actions.api.v1.TimedActionHolder;
@@ -23,7 +23,7 @@ public class TimedActionRegistry {
     }
 
     public <T extends EntityTimedAction<U>, U extends Entity> Identifier registerEntityAction(String name, EntityTimedAction.EntityFactory<T, U> actionFactory, Predicate<U> predicate) {
-        LibyIdentifier identifier = LibyIdentifier.of(this.namespace, name);
+        KittyLibIdentifier identifier = KittyLibIdentifier.of(this.namespace, name);
         if (InternalTimedActionRegistry.getTimedActionEntries().containsKey(identifier)) {
             throw new RuntimeException(
                     String.format("[TimedActions] Action with id \"%s\" has already been registered", identifier));
@@ -35,7 +35,7 @@ public class TimedActionRegistry {
 
 
     public <T extends TimedAction<U>, U extends TimedActionHolder> Identifier registerAction(String name, TimedAction.Factory<T, U> actionFactory, Predicate<U> predicate) {
-        LibyIdentifier identifier = LibyIdentifier.of(this.namespace, name);
+        KittyLibIdentifier identifier = KittyLibIdentifier.of(this.namespace, name);
         if (InternalTimedActionRegistry.getTimedActionEntries().containsKey(identifier)) {
             throw new RuntimeException(
                     String.format("[TimedActions] Action with id \"%s\" has already been registered", identifier));
@@ -54,7 +54,7 @@ public class TimedActionRegistry {
     }
 
     public <T extends TimedAction<U>, U extends TimedActionHolder> Identifier overwriteAction(String name, TimedAction.Factory<T, U> actionFactory, Predicate<U> predicate) {
-        LibyIdentifier identifier = LibyIdentifier.of(this.namespace, name);
+        KittyLibIdentifier identifier = KittyLibIdentifier.of(this.namespace, name);
         InternalTimedActionRegistry.setAction(identifier, actionFactory, predicate);
         return identifier;
     }
