@@ -19,7 +19,8 @@ public class StopTimedActionCommand {
     }
 
     public static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        if(context.getArgument("target", EntitySelector.class).getEntity(context.getSource()) instanceof LivingEntity target) {
+        var target = context.getArgument("target", EntitySelector.class).getEntity(context.getSource());
+        if(target != null) {
             if(target.getTimedAction().isPresent()) {
                 Identifier id = target.getTimedAction().get().getActionIdentifier();
                 target.stopTimedAction();

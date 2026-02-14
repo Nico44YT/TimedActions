@@ -5,6 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -22,8 +23,8 @@ public class CheckTimedActionCommand {
     }
 
     public static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-
-        if(context.getArgument("target", EntitySelector.class).getEntity(context.getSource()) instanceof LivingEntity target) {
+        var target = context.getArgument("target", EntitySelector.class).getEntity(context.getSource());
+        if(target != null) {
             if(target.getTimedAction().isEmpty()) {
                 MutableText text = Text.literal(String.format("There is no action playing for %s (%s)", target.getName().getString(), target.getUuid().toString()));
                 context.getSource().sendFeedback(() -> text, false);
@@ -40,7 +41,7 @@ public class CheckTimedActionCommand {
         return 1;
     }
 
-    private static @NotNull MutableText getMutableText(LivingEntity target) {
+    private static @NotNull MutableText getMutableText(Entity target) {
         TimedAction<TimedActionHolder> animation = target.getTimedAction().get();
 
         return Text.literal

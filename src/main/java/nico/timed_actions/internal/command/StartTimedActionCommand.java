@@ -50,7 +50,8 @@ public class StartTimedActionCommand {
     }
 
     public static int executeEntity(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        if (context.getArgument("target_entity", EntitySelector.class).getEntity(context.getSource()) instanceof LivingEntity target) {
+        var target = context.getArgument("target_entity", EntitySelector.class).getEntity(context.getSource());
+        if(target != null) {
             Optional<Supplier<TimedAction<TimedActionHolder>>> optional = InternalTimedActionRegistry.getActionSupplier(context.getArgument("animation_identifier", Identifier.class));
 
             if (optional.isPresent()) {
