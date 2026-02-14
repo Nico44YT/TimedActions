@@ -1,6 +1,7 @@
 package nico.timed_actions.api.v1;
 
 import net.minecraft.util.Identifier;
+import nico.timed_actions.internal.v1.networking.SyncActionS2C;
 
 import java.util.Optional;
 
@@ -39,6 +40,10 @@ public interface TimedActionHolder {
 
     default boolean isPlayingTimedAction() {
         return getTimedActionState() == TimedActionPlayState.PLAYING;
+    }
+
+    default void updateTimedAction(SyncActionS2C packet) {
+
     }
 
     enum AnimatableType {

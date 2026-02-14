@@ -84,7 +84,7 @@ public record SyncActionS2C(NbtCompound animationData,
         };
     }
 
-    public NbtElement getData() {
+    public NbtCompound getData() {
         return animationData;
     }
 

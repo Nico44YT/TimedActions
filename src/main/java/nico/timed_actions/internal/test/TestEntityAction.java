@@ -1,5 +1,6 @@
 package nico.timed_actions.internal.test;
 
+import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +19,11 @@ public class TestEntityAction extends EntityTimedAction<PlayerEntity> {
     @Override
     public void render(PlayerEntity player, float v, float v1, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
 
+    }
+
+    @Override
+    public RenderType shouldRender(PlayerEntity entity, Frustum frustum, double x, double y, double z) {
+        return RenderType.DEFAULT_RENDER;
     }
 
     @Override

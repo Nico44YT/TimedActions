@@ -22,7 +22,6 @@ public abstract class EntityTimedAction<T extends Entity> extends TimedAction<T>
         super(actionIdentifier, predicate);
     }
 
-
     @Environment(EnvType.CLIENT)
     public RenderType shouldRender(T entity, Frustum frustum, double x, double y, double z) {
         return RenderType.DEFAULT_RENDER;

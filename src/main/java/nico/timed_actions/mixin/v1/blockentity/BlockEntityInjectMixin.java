@@ -9,6 +9,7 @@ import nico.timed_actions.api.v1.TimedAction;
 import nico.timed_actions.api.v1.TimedActionHolder;
 import nico.timed_actions.api.v1.TimedActionPlayState;
 import nico.timed_actions.internal.v1.InternalTimedActionRegistry;
+import nico.timed_actions.internal.v1.networking.SyncActionS2C;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -110,6 +111,16 @@ public abstract class BlockEntityInjectMixin implements TimedActionHolder {
 
             this.playingAction = (BlockEntityTimedAction) InternalTimedActionRegistry.createAction(identifier, entity);
             if (this.playingAction != null) this.playingAction.readNbt(nbtCompound);
+        }
+    }
+
+    @Override
+    public void updateTimedAction(SyncActionS2C packet) {
+        if(this.playingAction != null) this.playingAction.readNbt(packet.getData());
+        else {
+            NbtCompound idNbt = packet.getData().getCompound("identifier");
+            Identifier id = Identifier.of(idNbt.getString("namespace"), idNbt.getString("path"));
+            this.playingAction = (BlockEntityTimedAction) InternalTimedActionRegistry.createAction(id, this);
         }
     }
 }

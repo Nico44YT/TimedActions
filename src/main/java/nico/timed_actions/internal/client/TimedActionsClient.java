@@ -15,13 +15,7 @@ public class TimedActionsClient implements ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(SyncActionS2C.PACKET_TYPE, (SyncActionS2C packet, ClientPlayerEntity clientPlayer, PacketSender packetSender) -> {
             TimedActionHolder holder = SyncActionS2C.getHolder(clientPlayer.getWorld(), packet.getResolver());
-
-            if (holder instanceof Entity entity) {
-                NbtCompound nbtCompound = new NbtCompound();
-                entity.writeNbt(nbtCompound);
-                nbtCompound.put("timed_action", packet.getData());
-                entity.readNbt(nbtCompound);
-            }
+            holder.updateTimedAction(packet);
         });
     }
 }
